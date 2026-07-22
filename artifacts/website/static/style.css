@@ -1,0 +1,144 @@
+/* Alabaster & Clay palette */
+:root {
+  --background: hsl(40, 20%, 98%);
+  --foreground: hsl(40, 10%, 20%);
+  --border:     hsl(40, 10%, 92%);
+  --primary:    hsl(25, 15%, 45%);
+  --muted:      hsl(40,  8%, 50%);
+  --font: 'Manrope', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--background);
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Animations ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-down { animation: fadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-in   { animation: fadeIn  1.5s 0.3s ease-out both; }
+
+/* ── Header ── */
+.header {
+  width: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: default;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--primary) 40%, transparent);
+  transition: background 0.7s;
+}
+.logo:hover .dot {
+  background: var(--primary);
+}
+
+.logo-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.7s;
+}
+.logo:hover .logo-text {
+  color: var(--foreground);
+}
+
+/* ── Main ── */
+.main {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle dot grid */
+.texture {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, var(--primary) 0%, transparent 1%);
+  background-size: 32px 32px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Soft vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--background) 80%);
+  pointer-events: none;
+}
+
+/* ── 404 ── */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-found-code {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+.not-found-line {
+  width: 2rem;
+  height: 1px;
+  background: var(--border);
+  margin: 1.5rem 0;
+}
+
+.not-found-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.not-found-link:hover {
+  color: var(--foreground);
+}
