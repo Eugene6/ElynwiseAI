@@ -3,24 +3,386 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NIghh</title>
+  <title>ElynWise</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
   <body>
-    <header class="header fade-down">
-      <div class="logo">
-        <span class="dot"></span>
-        <span class="logo-text">Welcome to Nigget</span>
-      </div>
-    </header>
-    
-    <div style="padding: 20px;">
-     <!-- <p> Welcome to Nigget</p> -->
+    <main class="welcome-screen">
+    <!-- ЛЕВАЯ ЧАСТЬ С ЛОГОТИПОМ -->
+    <div class="left-side">
+      <img src="/static/images/logo.png" alt="ElynWise" class="top-left-logo" />
     </div>
 
-    <main class="main fade-in">
-      <div class="texture"></div>
-      <div class="vignette"></div>
-    </main>
+    <!-- ПРАВАЯ ЧАСТЬ С ЭКРАНАМИ -->
+    <div class="right-side">
+      <!-- ПРОГРЕСС ОНБОАРДИНГА -->
+      <div class="onboarding-progress" id="onboarding-progress">
+        <div class="progress-track">
+          <div class="progress-fill-size" id="progress-fill-size"></div>
+          <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-dot" id="progress-dot"></div>
+        </div>
+
+        <div class = "progress-labels">
+          <span>100%</span>
+          <span>0%</span>
+        </div>
+      </div>
+
+      <!-- ЭКРАН 1: Hello -->
+      <div class="step-screen" id="step-1">
+        <h1 class="main-title">Hello!</h1>
+        <button class="click-btn" onclick="nextStep(2)">Click</button>
+      </div>
+
+      <!-- ЭКРАН 2: Let's set up your workspace -->
+      <div class="step-screen hidden" id="step-2">
+        <h1 class="main-title">Let's set up your<br>workspace.</h1>
+        <button class="click-btn" onclick="nextStep(3)">Click</button>
+      </div>
+
+      <!-- ЭКРАН 3: What would you like to do first? -->
+      <div class="step-screen hidden" id="step-3">
+        <h1 class="main-title">What would you<br>like to do first?</h1>
+        <div class="cards-container">
+
+          <!-- Первый ряд карточек -->
+          <div class="cards-row">
+            <button class="option-card" onclick="nextStep(4)">
+              <img src="/static/images/pencil.png" alt="Pencil" class="card-icon">
+              <span class="card-text">Write text or articles</span>
+            </button>
+            <button class="option-card" onclick="nextStep(4)">
+              <img src="/static/images/createimages.png" alt="Createimages" class="card-icon">
+              <span class="card-text">Create or edit images</span>
+            </button>
+          </div>
+
+          <!-- Второй ряд карточек -->
+          <div class="cards-row center-row">
+            <button class="option-card" onclick="nextStep(4)">
+              <img src="/static/images/code.png" alt="Code" class="card-icon">
+              <span class="card-text">Write codes or scripts</span>
+            </button>
+          </div>
+
+        </div>
+      </div> <!-- Закрыли экран 3 -->
+
+      <!-- ЭКРАН 4: What is your experience with AI tools? -->
+      <div class="step-screen hidden" id="step-4">
+        <h1 class="main-title">What is your experience<br>with AI tools?</h1>
+        <div class="cards-container">
+
+          <!-- Первый ряд карточек -->
+          <div class="cards-row">
+            <button class="option-card" onclick="nextStep(5)">
+              <img src="/static/images/star1.png" alt="Star1" class="card-icon">
+              <span class="card-text">Beginner</span>
+            </button>
+            <button class="option-card" onclick="nextStep(5)">
+              <img src="/static/images/star2.png" alt="Star2" class="card-icon">
+              <span class="card-text">Intermediate</span>
+            </button>
+          </div>
+
+          <!-- Второй ряд карточек -->
+          <div class="cards-row center-row">
+            <button class="option-card" onclick="nextStep(5)">
+              <img src="/static/images/star3.png" alt="Star3" class="card-icon">
+              <span class="card-text">Advanced</span>
+            </button>
+          </div>
+
+        </div>
+      </div> <!-- Закрыли экран 4 -->
+
+      <!-- ЭКРАН 5: How did you hear about us? -->
+      <div class="step-screen hidden" id="step-5">
+        <h1 class="main-title">How did you hear<br>about us?</h1>
+        <div class="cards-container">
+
+          <!-- Первый ряд карточек -->
+          <div class="cards-row">
+            <button class="option-card" onclick="nextStep(6)">
+              <img src="/static/images/earth.png" alt="Earth" class="card-icon">
+              <span class="card-text">Social media</span>
+            </button>
+            <button class="option-card" onclick="nextStep(6)">
+              <img src="/static/images/browser.png" alt="Browser" class="card-icon">
+              <span class="card-text">Search Engines</span>
+            </button>
+          </div>
+
+          <!-- Второй ряд карточек -->
+          <div class="cards-row center-row">
+            <button class="option-card" onclick="nextStep(6)">
+              <img src="/static/images/message.png" alt="Message" class="card-icon">
+              <span class="card-text">Other</span>
+            </button>
+          </div>
+
+        </div>
+      </div> <!-- Закрыли экран 5 -->
+
+      <!-- Копирайт -->
+      <p class="copyright">© 2026 Elynwise. All rights reserved.</p>
+
+      <!-- ЭКРАН 5: Log in -->
+      <div class="step-screen hidden" id="step-6">
+        <div class="login-container">
+          <h1 class="main-title login-title">Log in</h1>
+
+          <!-- Кнопки быстрых соцсетей -->
+          <div class="social-login-box">
+            <button class="social-btn">
+              <img src="/static/images/google.png" alt="Google" class="social-icon">
+              <span class="social-text">Continue with Google</span>
+            </button>
+            <button class="social-btn">
+              <img src="/static/images/apple.png" alt="Apple" class="social-icon">
+              <span class = "social-text">Continue with Apple</span>
+            </button>
+          </div>
+
+          <!-- Разделитель or -->
+          <div class="login-divider">
+            <span class="divider-line"></span>
+            <span class="divider-text">or</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <!-- Инпуты авторизации(Пароль, логин) -->
+          <form class="login-form" onsubmit="event.preventDefault(); nextStep(7);">
+            <div class="input-group">
+              <input type="email" placeholder="Email" class="login-input"">  
+            </div>
+            <div>
+              <input type="password" placeholder="Password" class="login-input">
+            </div>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+
+            <button type="submit" class="submit-login-btn">Login</button>
+          </form>
+        </div>
+      </div> <!-- Закрыли экран 5 -->
+      
+      <!-- ЭКРАН 6(FINAL): AI chat -->
+      <div class="step-screen hidden" id="step-7">
+        <div class="main-chat-layout">
+
+          <!-- Левая панель (сайдбар) -->
+          <aside class="left-sidebar" id="main-sidebar">
+            <!-- ВЕРХНЯЯ ЧАСТЬ САЙДБАРА -->
+            <div class="sidebar-top">
+              <div class="sidebar-header-box">
+                <img src="/static/images/logoelyn.png" alt="Logo" class="sidebar-logo" />
+                <img src="/static/images/LogoPurple.png" alt="LogoPurple" class="sidebar-logo-text" />
+                <div class="sidebar-expanded-actions">
+                  <button class="action-icon-btn" type="button"><img src="/static/images/lupa.png" alt="Lupa"></button>
+                  <button class="action-icon-btn" type="button" onclick="toggleSidebar()"><img src="/static/images/koka.png" alt="Koka"></button>
+                </div>
+                <button class="sidebar-menu-btn" id="burger-btn" type="button" onclick="toggleSidebar()">
+                  <img src="/static/images/sidelines.png" alt="Sidelines" class="menu-icon" />
+                </button>
+              </div>
+              <button class="new-chat-btn">
+                <span>New chat</span>
+              </button>
+            </div>
+             <!-- НИЖНЯЯ ЧАСТЬ САЙДБАРА (ПРОФИЛЬ) -->
+            <div class="sidebar-user-profile">
+                <img src="/static/images/user.png" alt="Useravatar" class="user-avatar"/>
+                <span class="user-name">Pidoras123</span>
+            </div>
+          </aside>
+
+          <!-- Правая зона с ботом -->
+          <div class="chat-zone">
+
+            <!-- Контейнер для сообщений (изначально пустой) -->
+            <div class="chat-messages-container" id="chat-messages"></div>
+
+            <!-- Приветственный текст по центру -->
+            <div class="chat-welcome">
+              <h2 class="welcome-text">Let’s create<br>something together!</h2>
+            </div>
+
+            <!-- Контейнер для поля ввода -->
+            <div class="input-wrapper-container">
+              <form class="chat-input-box" id="chat-form" onsubmit="sendMessage(event)">
+                <input type="text" placeholder="Ask something..." class="bot-input" id="user-input" required autocomplete="off">
+                <button class="mic-btn" type="submit">
+                  <img src="/static/images/micro.png" alt="Send" class="mic-icon" />
+                </button>
+              </form>
+            </div>
+
+          </div> <!-- Закрыли chat-zone -->
+        </div> <!-- Закрыли main-chat-layout -->
+      </div> <!-- Закрыли step-7 (Экран 6) -->
+      
+      <div class="theme-toggle-wrapper">
+        <span class ="theme-label">LIGHT THEME</span>
+        <button class="theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toogle theme">
+          <span class="theme-toggle-knob"></span>
+        </button>
+      </div>
+      
+    </div>
+  </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/script.js"></script>
+    
+    <script>
+      function nextStep(stepNumber) {
+        // Находим все экраны и скрываем их
+        document.querySelectorAll('.step-screen').forEach(screen => {
+          screen.classList.add('hidden');
+        });
+        // Находим нужный экран по его ID и показываем его
+        const nextScreen = document.getElementById('step-' + stepNumber);
+        if (nextScreen) {
+          nextScreen.classList.remove('hidden');
+        }
+
+        const progress = document.getElementById("onboarding-progress");
+        const fill = document.getElementById("progress-fill");
+        const dot = document.getElementById("progress-dot");
+        const fill_size = document.getElementById("progress-fill-size");
+
+        if (stepNumber == 3) {
+          progress.classList.add('visible');
+
+          fill.style.height = '0%';
+          dot.style.bottom = '0%';
+          fill_size.style.height = '100%';
+        }
+        else if (stepNumber == 4) {
+          progress.classList.add('visible');
+
+          fill.style.height = '50%';
+          dot.style.bottom = '50%';
+          fill_size.style.height = '100%';
+        }
+        else if (stepNumber == 5) {
+          progress.classList.add('visible');
+
+          fill.style.height = '100%';
+          dot.style.bottom = '100%';
+          fill_size.style.height = '100%';
+        }
+        else {
+          progress.classList.remove('visible');
+        }
+      }
+      function toggleSidebar() {
+        const sidebar = document.getElementById('main-sidebar');
+        if (sidebar) {
+           sidebar.classList.toggle('active');
+        }
+      }
+
+      function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        
+        const label = document.querySelector('.theme-label');
+          if (document.body.classList.contains('light-mode')) {
+            label.textContent = 'DARK THEME';
+          } else {
+            label.textContent = 'LIGHT THEME';
+          }
+      }
+      
+      async function sendMessage(event) {
+        event.preventDefault(); // Предотвращаем перезагрузку страницы
+
+        const inputEl = document.getElementById('user-input');
+        const messagesContainer = document.getElementById('chat-messages')
+        const welcomeBlock = document.querySelector('.chat-welcome')
+        const prompt = inputEl.value.trim();
+
+        if (!prompt) return;
+
+        // 1. Скрываем приветственный текст, если это первое сообщение
+        if (welcomeBlock) {
+          welcomeBlock.style.display = 'none';
+        }
+
+        // 2. Добавляем сообщение пользователя в чат
+        messagesContainer.innerHTML += `
+          <div class="message-row user-row">
+            <div class="message-bubble user-bubble">${prompt}</div>
+          </div>
+        `;
+
+        // 3. Очищаем поле ввода
+        inputEl.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // 3. Добавляем временную заглушку анимации ожидания ответа ИИ
+        const aiResponseId = 'ai-' + Date.now();
+        messagesContainer.innerHTML += `
+          <div class="message-row ai-row" id="${aiResponseId}">
+            <div class="message-bubble ai-bubble loading-dots">Thinking...</div>
+          </div>
+        `;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        try {
+          // 4. Отправляем запрос на сервер
+          const response = await fetch('/api/chat', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ prompt: prompt })
+          });
+
+          const text = await response.text();
+          let data;
+
+          try {
+            data = JSON.parse(text);
+            console.log("API response:", data);
+          } catch (e) {
+            console.error("SERVER RETURNED:", text);
+            const aiBubble = document
+              .getElementById(aiResponseId)
+              .querySelector('.message-bubble');
+            aiBubble.classList.remove('loading-dots');
+            aiBubble.innerText = `Server returned invalid response (${response.status}): ${text || "empty response"}`;
+            return;
+          }
+
+          const aiBubble = document
+            .getElementById(aiResponseId)
+            .querySelector('.message-bubble');
+
+          aiBubble.classList.remove('loading-dots'); // Убираем точки
+
+          if (response.ok && data.reply) {
+            // Выводим успешный ответ от Gemini
+            aiBubble.innerHTML = marked.parse(data.reply); 
+          } else {
+            // Выводим ошибку, если сервер вернул JSON с ошибкой
+            aiBubble.innerText = 'Error: ' + (data.error || 'Unknown error');
+          }
+
+        } catch (error) {
+            console.error(error);
+            const aiBubble = document
+                .getElementById(aiResponseId)
+                .querySelector('.message-bubble');
+            aiBubble.classList.remove('loading-dots');
+            aiBubble.innerText = 'Server error: ' + error.message;
+        }
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+      
+    </script> 
   </body>
 </html>

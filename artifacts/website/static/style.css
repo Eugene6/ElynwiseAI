@@ -1,144 +1,914 @@
-/* Alabaster & Clay palette */
-:root {
-  --background: hsl(30, 3%, 13%);
-  --foreground: hsl(40, 10%, 20%);
-  --border:     hsl(40, 10%, 92%);
-  --primary:    hsl(25, 15%, 45%);
-  --muted:      hsl(40,  8%, 50%);
-  --font: 'Manrope', sans-serif;
+@font-face {
+  font-family: 'Cal Sans';
+  src: url('/static/fonts/cal-sans.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
-
-*, *::before, *::after {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cal Sans', sans-serif;
 }
 
-html, body {
-  height: 100%;
+.welcome-screen {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-body {
-  font-family: var(--font);
-  background: var(--background);
-  color: var(--foreground);
+.left-side {
+  flex: 1;
+  background-image: url('/static/images/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  /* Сюда картинку елинавайса */
+}
+
+.right-side {
+  flex: 1;
+  background-color: #290B26;
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── Animations ── */
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.fade-down { animation: fadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.fade-in   { animation: fadeIn  1.5s 0.3s ease-out both; }
-
-/* ── Header ── */
-.header {
-  width: 100%;
-  padding: 2.5rem 2rem;
-  display: flex;
+  justify-content: center;
   align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: default;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--primary) 40%, transparent);
-  transition: background 0.7s;
-}
-.logo:hover .dot {
-  background: var(--primary);
-}
-
-.logo-text {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--muted);
-  transition: color 0.7s;
-}
-.logo:hover .logo-text {
-  color: var(--foreground);
-}
-
-/* ── Main ── */
-.main {
-  flex: 1;
   position: relative;
-  overflow: hidden;
+}
+
+.main-title {
+  font-size: 250px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #CEB8CC;
+  margin-bottom: 50px;
+  max-width: 90%;
+}
+
+.hidden {
+    display: none;
+}
+
+.step-screen:not(.hidden) {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.step-screen .main-title {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+#step-1 .main-title {
+  font-size: 128px;
+}
+
+.click-btn {
+  background: none; /* Убираем стандартный фон кнопки */
+  border: none;     /* Убираем рамку кнопки */
+  cursor: pointer;  /* Делаем курсор-палец при наведении */
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 100%;
+  text-decoration: underline;
+  color: #CEB8CC;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  color: #CEB8CC;
+}
+
+.top-left-logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;  
+}
+
+.cards-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.cards-row {
+  display: flex;
+  gap: 24px;
   justify-content: center;
 }
 
-/* Subtle dot grid */
-.texture {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at center, var(--primary) 0%, transparent 1%);
-  background-size: 32px 32px;
-  opacity: 0.03;
-  pointer-events: none;
+.center-row {
+  justify-content: center;
 }
 
-/* Soft vignette */
-.vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, var(--background) 80%);
-  pointer-events: none;
-}
-
-/* ── 404 ── */
-.not-found {
+.option-card {
+  background-color: rgba(255,255,255, 0.08);
+  border: 1px solid rgba(255,255,255, 0.01);
+  border-radius: 24px;
+  width: 160px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  padding: 16px;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0px 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
-.not-found-code {
-  font-size: 2.5rem;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+.option-card:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.15); /* Менее прозрачный при наведении */
+  border-color: rgba(255, 255, 255, 0.25); 
 }
 
-.not-found-line {
-  width: 2rem;
-  height: 1px;
-  background: var(--border);
-  margin: 1.5rem 0;
+.card-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
-.not-found-link {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.card-text {
+  color: #CEB8CC;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.step-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;/* Выравнивание элементов по center как в Figma */
+  width: 100%; /* Занимает всю доступную ширину */
+  max-width: 440px; /* Максимальная ширина контейнера */
+  text-align: left; /* Выравнивание текста по левому краю */
+  margin: 0 auto;
+}
+
+.step-screen .login-title {
+  font-size: 48;
+  margin-bottom: 35px;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.social-login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.social-btn {
+  background-color: rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 27px;
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.15); /* Менее прозрачный при наведении */
+  border-color: rgba(255, 255, 255, 0.25); 
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.social-text {
+  color: #CEB8CC;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 30px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background-color: rgba(206, 184, 204, 0.3);
+  display: inline-block;
+}
+
+.divider-text {
+  color: #CEB8CC;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 15px;
+  opacity: 0.7;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.login-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  color: #CEB8CC;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.2s ease;
+}
+
+.login-input:focus {
+  border-color: #CEB8CC;
+}
+
+.login-input::placeholder {
+  color: #CEB8CC;       /* Ваш фирменный светлый цвет */    
+  font-family: 'Cal Sans', sans-serif; /* Навешиваем шрифт вашего друга */
+  font-size: 16px;      /* Подберите размер, чтобы совпадал с Figma */
+  font-weight: 700;
+}
+
+.forgot-password {
+  color: #CEB8CC;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
-  color: var(--muted);
-  transition: color 0.3s;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  opacity: 0.8;
+  align-self: flex-end;
+  transition-opacity: 0.2s ease;
 }
-.not-found-link:hover {
-  color: var(--foreground);
+
+.forgot-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.submit-login-btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 28px;
+  border: none;
+  background-color: #CEB8CC;
+  color: #290B26;
+  font-size: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-login-btn:hover {
+  background-color: #E0D2E0;
+  transform: translateY(-2px)
+}
+
+.submit-login-btn:active {
+  transform:scale(0.95); /* Легкий эффект нажатия */
+}
+
+#step-7 {
+  padding: 0 !important;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-chat-layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-sidebar {
+  width: 71px;
+  height: 100vh;
+  background-color: #CEB8CC;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px 15px;
+  overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
+}
+
+.left-sidebar.active {
+  width: 318px;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.sidebar-header-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.sidebar-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+.sidebar-logo-text {
+  display: none;
+  height: 64px;
+  object-fit: contain;
+}
+
+.left-sidebar.active .sidebar-logo {
+  display: none;
+}
+
+.left-sidebar.active .sidebar-logo-text {
+  display: block;
+  max-width: 145px;
+}
+
+.sidebar-expanded-actions {
+  display: none;
+  gap: 12px;
+}
+
+.sidebar-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.menu-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.left-sidebar.active .sidebar-menu-btn {
+  display: none !important;
+}
+
+.left-sidebar.active .sidebar-expanded-actions {
+  display: flex;
+}
+
+.left-sidebar.active .sidebar-header-box {
+  /* Возвращаем горизонтальное положение (в один ряд), когда сайдбар открыт */
+  flex-direction: row; 
+  justify-content: space-between;
+  height: 40px;
+}
+
+.action-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+  opacity: 0.7;
+}
+
+.action-icon-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.new-chat-btn {
+  width: 100%;
+  height: 48px;
+  background: rgba(41, 11, 38);
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  color: #CEB8CC;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.new-chat-btn:hover {
+  background: rgba(41, 11, 38, 0.5);
+}
+
+.left-sidebar.active .new-chat-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding-left: 5px;
+  }
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: hue-rotate(50deg) saturate(0.8) brightness(0.9); 
+  transition: filter 0.3s ease;
+}
+
+.user-name {
+  color: #290B26;
+  font-size: 21px;
+  font-weight: 700;
+  opacity: 0;
+  font-family: 'Cal Sans', sans-serif;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.left-sidebar.active .user-name {
+  opacity: 1;
+}
+
+
+
+.chat-zone {
+  flex: 1;
+  background-color: #290B26;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  padding: 40px;
+}
+
+.chat-messages-container:empty {
+  display: none;
+}
+
+.chat-zone:has(.chat-messages-container:empty) {
+  justify-content: center;
+}
+
+.chat-zone:has(.chat-messages-container:not(empty)) {
+  justify-content: flex-end;
+}
+
+.chat-zone:has(.chat-messages-container:not(:empty)) .chat-welcome {
+  display: none;
+}
+
+.chat-zone:has(.chat-messages-container:not(:empty)) .chat-messages-container {
+  display: flex;
+  flex: 1;
+}
+
+.chat-zone:has(.chat-messages-container:not(:empty)) .input-wrapper-container {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.chat-welcome {
+  text-align: center;
+  margin-bottom: 24px;
+} 
+
+.welcome-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: #CEB8CC;
+  line-height: 130%;
+  margin-bottom: 40px;
+}
+
+.input-wrapper-container {
+  width: 100%;
+  max-width: 540px;
+}
+
+.chat-input-box {
+  width: 100%;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 10px 40px 0 rgb(255, 255, 255, 0.3);
+}
+
+.bot-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #CEB8CC;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Cal Sans', sans-serif;
+}
+
+.bot-input::placeholder {
+  color: #CEB8CC;
+  opacity: 0.6;
+}
+
+.mic-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  transition: opacity 0.2s;
+  opacity: 0.7;
+}
+
+.mic-btn:hover {
+  opacity: 1;
+}
+
+.mic-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* Контейнер для истории сообщений */
+.chat-messages-container {
+  width: 100%;
+  max-width: 700px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 5px;
+  margin-bottom: 20px;
+
+  scrollbar-width: none;
+}
+.chat-messages-constainer::-webkit-scrollbar {
+  display: none;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.ai-row {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-family: 'Cal Sans', sans-serif;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.user-bubble {
+  background: rgba(206, 184, 204, 0.25);
+  border: 2px solid rgba(206, 184, 204, 0.5);
+  color: #ffffff;
+  border-radius: 18px 18px 4px 18px; /* Скошенный уголок справа внизу */
+  font-weight: 600;
+}
+
+.ai-bubble {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: #CEB8CC;
+  border-radius: 20px 20px 20px 4px; /* Скошенный уголок слева внизу */
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+}
+
+.loading-dots {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.onboarding-progress {
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.onboarding-progress.visible {
+  opacity: 1;
+}
+
+.progress-fill-size {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 10px;
+  height: 0%;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.progress-track {
+  position: relative;
+  width: 5px;
+  height: 350px;
+  background: rgba(206, 184, 204, 0.12);
+  border-radius: 12px;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 10px;
+  height: 0%;
+
+  background: #CEB8CC;
+  border-radius: 10px;
+
+  transition: height 0.6s ease;
+}
+
+.progress-dot {
+  position: absolute;
+  left: 91%;
+  bottom: 0%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, 50%);
+  background: #ffffff;
+  border: 3px solid #CEB8CC;
+  border-radius: 50%;
+  transition: bottom 0.6s ease;
+}
+
+.progress-labels {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: #CEB8CC;
+  opacity: 0.8;
+}
+
+.progress-labels span {
+  display: block;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+}
+
+.theme-toggle-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  gap: 8x;
+  z-index: 1000;
+}
+
+.theme-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #CEB8CC;
+  opacity: 0.8;
+  text-transform: uppercase;
+  transition: color 0.3 ease;
+}
+
+.theme-toggle-btn {
+  position: relative;
+  width: 44px;
+  height: 22px;
+  border: none;
+  border-radius: 11px;
+  background-color: rgba(255,255,255, 0.08);
+  border: 1px solid rgba(255,255,255, 0.01);
+  cursor: pointer;
+  padding: none;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #CEB8CC;
+  transition: transform 0.3 ease;
+}
+
+body.light-mode .theme-toggle-btn {
+  background-color: ;
+  
+}/* Обертка (остается без изменений) */
+.theme-toggle-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+}
+
+/* Текст */
+.theme-label {
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #CEB8CC; 
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: color 0.3s ease;
+}
+
+/* Сама кнопка-переключатель (размеры 40x22 как на скрине) */
+.theme-toggle-btn {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 11px; /* половина высоты для идеального овала */
+  background-color: rgba(255,255,255, 0.08);
+  border: 1px solid rgba(255,255,255, 0.01);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 2px; 
+  left: 2px;
+  width: 18px; 
+  height: 18px;
+  border-radius: 50%;
+  background-color: #CEB8CC;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- ЛОГИКА ДЛЯ СВЕТЛОЙ ТЕМЫ --- */
+/* Если мы переключимся на светлую тему, цвета инвертируются */
+
+body.light-mode .theme-toggle-btn {
+  background-color: #CEB8CC; /* Светлый фон для трека */
+}
+
+body.light-mode .theme-toggle-knob {
+  transform: translateX(18px); /* Кружок уезжает влево */
+  background-color: #3b2b4d; /* Кружок становится темным */
+}
+
+body.light-mode .theme-label {
+  color: #3b2b4d;
+}
+
+body.light-mode{
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #0f0f15
+}
+
+body.light-mode .theme-toggle-wrapper {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.light-mode .onboarding-progress {
+  filter: none; 
+}
+
+body.light-mode .progress-track {
+  background-color: rgba(0, 0, 0, 0.1); /* Светло-серый трек */
+}
+
+body.light-mode .progress-fill-size {
+  background-color: #3b2b4d; /* Темно-фиолетовый цвет заливки (как на макете) */
+}
+
+body.light-mode .progress-dot {
+  background-color: #2c1e3f;
+  border: 2px solid #f4d3ec; 
+}
+
+body.light-mode .progress-labels span {
+  color: rgb(87, 56, 159);
+}
+
+body.light-mode .progress-fill {
+  background-color: #CEB8CC;; /* Светло-розово-серый цвет, чтобы не сливался с фоном */
 }
